@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Star Wars project</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+        }
+        #box {
+            text-align: center;
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+        background-color: #45a049;
+        }
+
+        #characterInfo {
+            margin-top: 20px;
+        }
+
+        h3 {
+            color: #333;
+        }
+
+        img {
+            max-width: 400px;
+            height: auto;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <h1>Star Wars Characters</h1>
+    
+        <div id="characterInfo"></div>
+        <button id="generateCharacter">Generate Character</button>
+    </div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+
+    <script>
+        
+        $(document).ready(function() {
+            
+            $("#generateCharacter").on("click", function(e) {
+                const randomNumber = Math.ceil(Math.random() * 88);
+
+                $.get(`https://akabab.github.io/starwars-api/api/id/${randomNumber}.json`, function(data) {
+                    
+                    let name = data['name'];
+                    let image = data['image'];
+
+                    $("#characterInfo").html(`<img src="${image}" alt="${name}"><h3>Name: ${name}</h3>`);
+                })
+            
+            })
+        })
+
+       
+    </script>
+    
+</body>
+</html>
